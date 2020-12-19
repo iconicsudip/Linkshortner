@@ -4,6 +4,7 @@ from django.contrib import messages, auth
 from wc.models import shorturl,notuserurl
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+import requests
 import random
 import string
 
