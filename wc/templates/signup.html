@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block title %}Home {% endblock title %}
+
+{% block body %}
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/footer.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}">
+<link rel="shortcut icon" href="static/images/images.png" type="image/x-icon">
+<div class="form" style="background: #00f3ff4f;margin:70px;background-image: url('/static/images/open-graph.png');">
+  {% if error %}
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    {{error}}
+    <button style="float: right; border: none; background: transparent;" type="button" class="btn-close" data-dismiss="alert" aria-label="Close">
+      <span area-hidden-true>&times;</span>
+    </button>
+  </div>
+  {% endif %}
+  <form action="{% url 'signup' %}" method="POST" class="inside-form" >
+    <h1 style="text-align: center;">Sign Up Form</h1>
+    {% csrf_token %}
+    <label for="validationDefault02">Choose Username</label>
+    <div class="input-group input-group-sm">
+      <input type="text" class="form-control fix-rounded-right" name="username" required>
+
+      <div class="invalid-feedback">
+        Please choose a username.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="exampleInputEmail1">Email address</label>
+      <input type="email" class="form-control" autocomplete="off" name="email" id="exampleInputEmail1" aria-describedby="emailHelp">
+      
+      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Password</label>
+      <input type="password" class="form-control" autocomplete="off" name="password" id="inputPassword">
+      <i style="cursor: pointer;float:right;margin-top: -28px;" class="fa fa-eye" id="togglePassword"></i>
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Confirm Password</label>
+      <input type="password" class="form-control" autocomplete="off" name="password2" id="inputPassword1">
+      <i style="cursor: pointer;float:right;margin-top: -28px; " class="fa fa-eye" id="togglePassword1"></i>
+    </div>
+    <div class="form-group">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
+        <label class="form-check-label" for="invalidCheck2">
+          Agree to terms and conditions
+        </label>
+      </div>
+    </div>
+    <button class="btn btn-primary" type="submit">Submit form</button>
+    <p></p>
+        <h6>Already have an account ? <a href="{% url 'signin' %}">Sign In</a> here</h6>
+  </form>
+</div>
+<footer>
+  <div class="footer">
+    <h6>All Rights Reserved &#169; Sudip Das (2020) </h6>
+  </div>
+</footer>
+<script>
+  var alertList = document.querySelectorAll('.btn-close')
+  alertList.forEach(function (alert) {
+    new bootstrap.Alert(alert)
+  })
+</script>
+{% block js %}{% endblock js %}
+{% endblock body %}

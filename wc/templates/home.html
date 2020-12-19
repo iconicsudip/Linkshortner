@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+{% block body %}
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/footer.css' %}">
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    {{message}}
+  <button style="float: right; border: none; background: transparent;" type="button" class="btn-close"
+    data-dismiss="alert" aria-label="Close">
+    <span area-hidden-true>&times;</span>
+  </button>
+</div>
+{% endfor %}
+{% endif %}
+{% if user.is_authenticated %}
+{% else %}
+<div class="alert alert-warning" style="position: relative; margin-top: 80px; width: 100%;left: 0;top:4%;"
+          role="alert">
+          <h4 class="alert-heading">Sign Up(Latest Update)</h4>
+          <p>To get your own dashboard and know how many clicks on your short link and get strong password generator <span style="color: white;font-size: 15px;" class="badge bg-danger">New</span> <a href="{% url 'signup' %}">Sign Up</a> here.</p>
+          
+</div>
+{% endif %}
+<style>
+main .grid-container{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    height: 30px;
+}
+.grid1{
+    background-color: orange;
+}
+.grid2{
+    background-color: white;
+}
+.grid3{
+    background-color: green;
+}
+
+</style>
+<section>
+
+  <header class="page-header page-header-dark bg-img-cover overlay overlay-primary overlay-90" style="background-color: #3b70d6;background-image: url('static/images/comp.jpg');background-repeat: no-repeat;padding-top:8rem;padding-bottom: 0rem;background-position:left;background-size: 100rem;">
+    <div class="page-header-content py-5" style="margin-bottom: 20%;color: white;" wfd-id="170">
+        <div class="container" wfd-id="171">
+            <div class="row justify-content-center"  wfd-id="177">
+                <div class="col-xl-8 col-lg-10 text-center" wfd-id="178">
+                    <h1 class="page-header-title">Short your URLS right now.</h1>
+                    <p class="page-header-text mb-5">Short your neccessary urls as your wish.</p>
+                </div>
+            </div>
+            <div class="row justify-content-center" wfd-id="172">
+                <div class="col-xl-6 col-lg-8 text-center" wfd-id="173">
+                    <form class="form-inline justify-content-center" action="{% url 'notgenerate' %}" method="POST" wfd-id="174">
+                      {% csrf_token %}
+                        <div class="form-group flex-fill mb-2 mr-2" wfd-id="175"><input style="width:100%;" name="notoriginal" type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3"></div>
+                        <button style="margin-bottom: 8px;" class="btn btn-success" type="submit"> Snip Url </button>
+                    </form>
+                    {% for u in urls %}
+                    <input type="text" readonly class="form-control" value=" http://localhost:8000/{{u.short_url}} " id="aftershort" aria-describedby="basic-addon3">
+                    {% endfor %}
+                    <p class="page-header-text small mb-0">By signing up, you can get dashboard with custom url</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="svg-border-rounded text-white" wfd-id="169">
+        <!-- Rounded SVG Border--><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144.54 17.34" preserveAspectRatio="none" fill="currentColor"><path d="M144.54,17.34H0V0H144.54ZM0,0S32.36,17.34,72.27,17.34,144.54,0,144.54,0"></path></svg>
+    </div>
+  </header>
+  <main>
+    <div class="grid-container">
+      <div class="grid1"></div>
+      <div class="grid2"></div>
+      <div class="grid3"></div>
+    </div>
+    <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light" style="background: url('static/images/about3.png') center no-repeat fixed;margin: 0!important;">
+      <div class="col-md-5 p-lg-5 mx-auto my-5">
+        <h1 class="display-4 fw-normal">Advantages</h1>
+        <p class="lead fw-normal">You will get all modern facilities what you want. Very fast and scalable. 56,80,02,35,584 number of links you can short.</p>
+        {% if user.is_authenticated %}
+        <a class="btn btn-outline-secondary" href="{% url 'dashboard' %}">Short Link Now</a>
+        {% else %}
+        <a class="btn btn-outline-secondary" href="{% url 'signup' %}">Get Start Now</a>
+        {% endif %}
+      </div>
+      <div class="product-device shadow-sm d-none d-md-block"></div>
+      <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
+    </div>
+
+    <div class="grid-container">
+      <div class="grid1"></div>
+      <div class="grid2"></div>
+      <div class="grid3"></div>
+    </div>
+    <div class="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3" style="background: url(/static/images/about3.png) no-repeat center;background-size: 350px;">
+      <div style="margin: auto;" class="bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+        <div class="my-3 p-3">
+          <h2 class="display-5">Dashboard &#129321</h2>
+          <p class="lead">All details,clicks,urls will be here in dashboard.</p>
+        </div>
+        <div class="bg-light shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;background: url('static/images/dashboard.jpg') no-repeat left;background-size: 30rem;"></div>
+      </div>
+      <div style="margin: auto;" class="bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+        <div class="my-3 p-3">
+          <h2 class="display-5">Clicks &#128071;&#127995;</h2>
+          <p class="lead">You can realize how many clicks in the urls.</p>
+        </div>
+        <div class="bg-dark shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;background: url('static/images/click.jpg') no-repeat center;background-size: 30rem;"></div>
+      </div>
+    </div>
+  <div class="grid-container">
+    <div class="grid1"></div>
+    <div class="grid2"></div>
+    <div class="grid3"></div>
+  </div>
+    <div class="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3" style="background: url('static/images/background.jpg') no-repeat center;background-size: 350px;">
+      <div style="margin: auto;" class="bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+        <div class="my-3 p-3">
+          <h2 class="display-5">Free Password Generator<p>&#9989</p></h2>
+          <p class="lead">Generate strong password as your wish.<h3 style="color: red;">FREE</h3></p>
+        </div>
+        <div class="bg-dark shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;background: url('static/images/password.jpg') no-repeat center; background-size: 20rem;"></div>
+      </div>
+      <div style="margin: auto;" class="bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+        <div class="my-3 p-3">
+          <h2 class="display-5">Generate Custom Link !!! <p>&#128561</p> </h2>
+          <p class="lead">Generate custom link absolutely <h3 style="color: red;">FREE</h3></p>
+        </div>
+        <div class="bg-dark shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0; background: url('static/images/custom.png') no-repeat center; background-size: 20rem;"></div>
+      </div>
+    </div>
+    <div class="grid-container">
+      <div class="grid1"></div>
+      <div class="grid2"></div>
+      <div class="grid3"></div>
+    </div>
+
+  </main>
+  <footer>
+    <div class="footer">
+      <h6>All Rights Reserved &#169; Sudip Das (2020) </h6>
+    </div>
+  </footer>
+</section>
+
+
+{% endblock body %}

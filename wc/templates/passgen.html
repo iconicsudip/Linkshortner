@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block body %}
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/footer.css' %}">
+<link rel="stylesheet" href="{% static 'css/passgen.css' %}">
+<img src="{% static 'images/open-graph.png' %}" style="position: absolute;z-index: 2;float: right ;width: 30%;
+background: transparent;
+right: 0%;
+bottom: 0%;">
+<div class="generate" style="background: url('/static/images/open-graph.png') center ;background-color: #00f3ff4f;
+border-radius: 3rem;box-shadow: 0px 0px 10px 2px;">
+    <h2>Password Generator</h2>
+    <input id="show" class="input" name="" type="text " placeholder="Generated Password" readonly="">
+    <i onclick="clicked()" class="fa fa-copy"></i>
+    <button onclick="getpassword()" class="button"><h5>Generate</h5></button>
+    <div class="change" style="margin: auto;">
+        <button onclick="buttonclickdown();" style="padding-left: 10px;padding-right: 10px;">-</button>
+        <input id="size" style="margin-top: 2%;width: 50%;" type="text">
+        <button onclick="buttonclickup();" style="padding-left: 8px;padding-right: 8px;">+</button>
+    </div>
+</div>
+<footer>
+    <div class="footer">
+      <h6>All Rights Reserved &#169; Sudip Das (2020) </h6>
+    </div>
+  </footer>
+<script src="{% static 'js/passgen.js' %}"></script>
+{% endblock body %}

@@ -1,0 +1,42 @@
+.navbar1 nav{
+    position: fixed;
+    z-index: 2;
+    width: 100%;
+    background:black!important;
+    top: 0;
+}
+main .grid-container{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    height: 30px;
+}
+.grid1{
+    background-color: orange;
+}
+.grid2{
+    background-color: white;
+}
+.grid3{
+    background-color: green;
+}
+.scrolling-active{
+    position: relative;
+    z-index: -2;
+    background-color: rgb(59 112 214)!important;
+    box-shadow: 0px 0px 20px 5px rgb(0 0 0 / 0.7);
+    
+}
+
+html{
+    position: relative;
+    background: #833ab4;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #fcb045, #fd1d1d, #833ab4);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #fcb045, #fd1d1d, #833ab4); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+body{
+    background: #833ab4;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #fcb045, #fd1d1d, #833ab4);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #fcb045, #fd1d1d, #833ab4); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}

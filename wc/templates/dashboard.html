@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+
+{% block title %}Home {% endblock title %}
+
+{% block body %}
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/footer.css' %}">
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+<link rel="shortcut icon" href="static/images/images.png" type="image/x-icon">
+<div class="form" style="background: #00f3ff4f;margin-top: 120px;">
+  {% if messages %}
+      {% for message in messages %}
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{message}}
+        <button style="float: right; border: none; background: transparent;" type="button" class="btn-close"
+          data-dismiss="alert" aria-label="Close">
+          <span area-hidden-true>&times;</span>
+        </button>
+      </div>
+      {% endfor %}
+      {% endif %}
+
+  <form class="inside-form" action="{% url 'generate' %}" method="POST" style="background: url('/static/images/open-graph.png') center;">
+    {% csrf_token %}
+    <h2 style="text-align: center;">Snip Your Url</h2>
+    <label for="basic-url">Original Url</label>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon3">https://example.com/...</span>
+      </div>
+      <input name="original" type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+    </div>
+    <small><b>Note : </b>You have to enter https:// or http:// before url</small>
+    <p></p>
+    <label for="basic-url">Custom or Random</label>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon3">https://localhost:8000/</span>
+      </div>
+      <input name="short" type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+    </div>
+    
+    <small>If you enter your custom name then generate that or generate randomly</small>
+    <p></p>
+    <div class="form-group">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
+        <label class="form-check-label" for="invalidCheck2">
+          Agree to terms and conditions
+        </label>
+      </div>
+    </div>
+    <button class="btn btn-primary" type="submit"> &#8618; Snip Url &#8617;</button>
+  </form>
+</div>
+<div class="link-list" style="margin-top: 25px;background: white;">
+  
+  
+  <h5 style="text-align: center;">Your All Urls Is Here</h5>
+  <br>
+  <div class="list-container">
+    <div class="grid">
+      <h6>Original Urls</h6>
+      <p>&#11015;</p>
+    </div>
+    <div class="grid">
+      <h6>Snipped Urls</h6>
+      <p>&#11015;</p>
+    </div>
+    <div class="grid">
+      <h6>Copy Your Urls</h6>
+      <p>&#11015;</p>
+    </div>
+    <div class="grid">
+      <h6>Clicks</h6>
+      <p>&#11015;</p>
+      
+    </div>
+  </div>
+<div class="list-container" >
+  {% for u in urls %}
+  <a style="color: brown;" class="beforeshort" href="{{u.original_url}}">{{u.original_url}}</a>
+  <a style="color: brown;" class="aftershort" id="link" href="http://localhost:8000/{{u.short_url}}">http://localhost:8000/{{u.short_url}}</a>
+  <div class="input-group mb-3">
+    <input readonly type="text" class="form-control" value=" http://localhost:8000/{{u.short_url}} " id="aftershort" aria-describedby="basic-addon3">
+    <i onclick="clicked()" class="fas fa-copy"></i>
+  </div>
+  <p style="text-align: right; margin-right: 135px;">{{u.clicks}}</p>
+  {% endfor %}
+</div>
+</div>
+<footer>
+  <div class="footer" style="margin-top: 110px;">
+    <h6>All Rights Reserved &#169; Sudip Das (2020) </h6>
+  </div>
+</footer>
+<script>
+  function clicked() {
+    var copytext = document.getElementById('aftershort');
+    copytext.select();
+    copytext.setSelectionRange(0,99999);
+    document.execCommand('copy');
+
+  }
+</script>
+{% block js %}{% endblock js %}
+
+{% endblock body %}

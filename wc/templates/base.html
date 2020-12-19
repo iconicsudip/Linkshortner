@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+    integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/index.css' %}">
+  <link rel="icon" href="static/images/shlink-logo-blue.jpg" style="border-radius: 5rem;" type="image/icon type">
+  <title>Snip Url</title>
+  <link rel="shortcut icon" href="{%static 'images/images.png' %}" type="image/x-icon">
+</head>
+
+<body>
+  <div class="navbar1">
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary" style="padding: 17px;">
+      <img style="width: 40px;" src="{% static 'images/images.png' %}" alt="">
+      <a class="navbar-brand" style="margin: auto;" href="{% url 'home' %}">SnipUrl</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div style="float: right;" class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-link active" style="margin-right:0;margin: auto;" href="{% url 'home' %}">Home <span
+              class="sr-only">(current)</span></a>
+          {% if user.is_authenticated %}
+          <div class="sign-log" style="display:inline-flex;"></div>
+          <a class="nav-link active" style="margin: auto;" href="{% url 'dashboard' %}">Dashborad</a>
+          <a class="nav-link active" style="margin: auto;" href="{% url 'passgen' %}">Password Generator</a>
+          <a class="nav-link active" style="margin: auto;" href="{% url 'logout' %}">Log Out</a>
+          <img src="{% static 'images/avatar.jpg' %}" style="width: 60px;margin: auto;" alt="Avatar" class="avatar">
+          <h6 style="margin: auto; color: firebrick;">{{ user.username }}</h6>
+          <span style="margin: auto;" class="badge rounded-pill bg-success">Verified</span>
+        </div>
+        {% else %}
+        <div class="sign-log" style="display:inline-flex;">
+          <a class="nav-link active" style="margin: auto;" href="{% url 'signin' %}">Log In</a>
+          <a class="nav-link active" style="margin: auto;" href="{% url 'signup' %}">Sign Up</a>
+          <span style="margin: auto;" class="badge rounded-pill bg-danger">Not Verified</span>
+
+        </div>
+        
+        {% endif %}
+      </div>
+  </div>
+  </nav>
+  </div>
+  
+
+  <!-- Optional JavaScript; choose one of the two! -->
+
+  <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"
+    integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js"
+    integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj"
+    crossorigin="anonymous"></script>
+  <!-- Option 2: jQuery, Popper.js, and Bootstrap JS
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
+    -->
+
+  {% block body %} {% endblock body %}
+  <script src="{% static 'js/index.js' %}"></script>
+  <script>
+    const togglePassword = document.querySelector('#togglePassword');
+    const password = document.querySelector('#inputPassword');
+    togglePassword.addEventListener('click', function (e) {
+      const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+      password.setAttribute('type', type);
+      this.classList.toggle('fa-eye-slash');
+    });
+    const togglePassword1 = document.querySelector('#togglePassword1');
+    const password1 = document.querySelector('#inputPassword1');
+    togglePassword1.addEventListener('click', function (e) {
+      const type = password1.getAttribute('type') === 'password' ? 'text' : 'password';
+      password1.setAttribute('type', type);
+      this.classList.toggle('fa-eye-slash');
+    });
+
+  </script>
+  {% block js %} {% endblock js %}
+</body>
+
+</html>

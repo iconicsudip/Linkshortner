@@ -1,0 +1,11 @@
+.form {
+    margin: 130px;
+    border: 2px solid white;
+    box-shadow: 0px 0px 11px 3px;
+    border-radius: 8px;
+    background: #00ff89; background-image: url('/static/images/open-graph.png');
+  }
+
+.inside-form {
+    margin: 25px;
+}
