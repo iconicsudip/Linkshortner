@@ -9,6 +9,6 @@ urlpatterns = [
     path('passgen/',views.passgen,name="passgen"),
     path('logout/',views.logout,name="logout"),
     path('generate/',views.generate,name="generate"),
-    path('notgenerate/',views.notgenerate,name="notgenerate"),
+    path('/',views.notgenerate,name="notgenerate"),
     path('<str:query>/', views.home,name="home"),
 ]

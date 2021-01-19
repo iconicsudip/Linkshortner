@@ -58,6 +58,10 @@
   
   
   <h5 style="text-align: center;">Your All Urls Is Here</h5>
+  {% with url_id|last as last %}<!--For get last index -->
+    <h4 style="text-align: center;">You can short now total - {{ urls.last.total_user }}</h4>
+  {% endwith %}
+  
   <br>
   <div class="list-container">
     <div class="grid">
@@ -83,8 +87,8 @@
   <a style="color: brown;" class="beforeshort" href="{{u.original_url}}">{{u.original_url}}</a>
   <a style="color: brown;" class="aftershort" id="link" href="http://localhost:8000/{{u.short_url}}">http://localhost:8000/{{u.short_url}}</a>
   <div class="input-group mb-3">
-    <input readonly type="text" class="form-control" value=" http://localhost:8000/{{u.short_url}} " id="aftershort" aria-describedby="basic-addon3">
-    <i onclick="clicked()" class="fas fa-copy"></i>
+    <input readonly type="text" class="form-control" value=" http://localhost:8000/{{u.short_url}} " id="{{u.url_id}}" aria-describedby="basic-addon3">
+    <i onclick="clicked({{u.url_id}})" class="fas fa-copy"></i>
   </div>
   <p style="text-align: right; margin-right: 135px;">{{u.clicks}}</p>
   {% endfor %}
@@ -96,8 +100,8 @@
   </div>
 </footer>
 <script>
-  function clicked() {
-    var copytext = document.getElementById('aftershort');
+  function clicked(id) {
+    var copytext = document.getElementById(id);
     copytext.select();
     copytext.setSelectionRange(0,99999);
     document.execCommand('copy');

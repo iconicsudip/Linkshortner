@@ -19,7 +19,7 @@ def signin(request):
                     user = User.objects.get(email=request.POST['email'])
                     auth.login(request, user)
                     messages.success(
-                        request, "You are successfully loggedin now you can see your dashboard")
+                        request, "You are successfully logged in now, you can see your dashboard")
                     return redirect('dashboard')
                 except User.DoesNotExist:
                     return render(request, 'signin.html', {'error': "User doesnot exists"})
@@ -37,7 +37,7 @@ def signup(request):
             if request.POST['username'] and request.POST['email'] and request.POST['password']:
                 try:
                     user = User.objects.get(email=request.POST['email'])
-                    return render(request, 'signup.html', {'error': "User already exists"})
+                    return render(request, 'signup.html', {'error': "User(In this Email id) already exists"})
                 except User.DoesNotExist:
                     user = User.objects.create_user(
                         username=request.POST['username'],
@@ -45,7 +45,7 @@ def signup(request):
                         password=request.POST['password'],
                     )
                     user.save()
-                    messages.success(request, "Signup Successfully Logged In")
+                    messages.success(request, "Signup Successfully Now You Can Log In")
                     return redirect(signin)
             else:
                 return render(request, 'signup.html', {'error': "Empty Fields"})
@@ -64,21 +64,34 @@ def logout(request):
 def randgenerate():
     return ''.join(random.choice(string.ascii_uppercase + string.digits +
                           string.ascii_lowercase) for _ in range(6))
-
+idcount=0
+def urlid():
+    global idcount
+    idcount += 1
+    return idcount
+count =0
+def check_count():
+    global count
+    count += 1
+    return count
 def notgenerate(request):
-    count =0
     if request.method == "POST":
         if request.POST['notoriginal']:
             notoriginal = request.POST['notoriginal']
             gen =False
             while not gen:
                 short = randgenerate()
+                ccount = check_count()
                 check = notuserurl.objects.filter(short_url=short)
-                if not (check and count==5):
-                    newurl = notuserurl(original_url=notoriginal,short_url=short)
-                    urls = notuserurl.objects.filter(short_url=short)
-                    newurl.save()
-                    return render(request, 'home.html', {'urls': urls})
+                if not (check):
+                    if (ccount<=5):
+                        newurl = notuserurl(original_url=notoriginal,short_url=short)
+                        urls = notuserurl.objects.filter(short_url=short)
+                        newurl.save()
+                        return render(request, 'home.html', {'urls': urls})
+                    else:
+                        messages.error(request, "You have to sign up")
+                        return redirect('/signin/')
                 else:
                     continue
         else:
@@ -87,6 +100,12 @@ def notgenerate(request):
         pass
     return render(request, 'home.html', {'urls': urls})
 
+total_url = 1 #56800235583
+def urltotal():
+    global total_url
+    c = 56800235584 - total_url
+    total_url += 1
+    return c
 @login_required(login_url='/signin/')
 def generate(request):
     if request.method == "POST":
@@ -94,10 +113,12 @@ def generate(request):
             usr = request.user
             original = request.POST['original']
             short = request.POST['short']
-            check = shorturl.objects.filter(short_url=short)
+            id_url = urlid()
+            total = urltotal()
+            check = shorturl.objects.filter(short_url=short,url_id=id_url,total_user=total)
             if not check:
                 newurl = shorturl(
-                    user=usr, original_url=original, short_url=short,)
+                    user=usr, original_url=original, short_url=short,url_id=id_url,total_user=total)
                 newurl.save()
                 return redirect(dashboard)
             else:
@@ -109,10 +130,12 @@ def generate(request):
             gen = False
             while not gen:
                 short = randgenerate()
-                check = shorturl.objects.filter(short_url=short)
+                id_url = urlid()
+                total = urltotal()
+                check = shorturl.objects.filter(short_url=short,url_id=id_url,total_user=total)
                 if not check:
                     newurl = shorturl(
-                        user=usr, original_url=original, short_url=short)
+                        user=usr, original_url=original, short_url=short,url_id=id_url,total_user=total)
                     newurl.save()
                     return redirect(dashboard)
                 else:
