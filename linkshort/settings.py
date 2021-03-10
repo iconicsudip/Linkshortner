@@ -26,7 +26,7 @@ SECRET_KEY = '3)ww3%7pbjm&de17iiar-@t6dg7dykis!=lx-y%wh)2r!&h0-e'
 DEBUG = False
 
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1','sniply.herokuapp.com']
 
 
 # Application definition
