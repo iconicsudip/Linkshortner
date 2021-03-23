@@ -62,8 +62,7 @@ def logout(request):
 
 
 def randgenerate():
-    return ''.join(random.choice(string.ascii_uppercase + string.digits +
-                          string.ascii_lowercase) for _ in range(6))
+    return ''.join(random.choice(string.ascii_uppercase + string.digits + string.ascii_lowercase) for _ in range(6))
 idcount=0
 def urlid():
     global idcount
