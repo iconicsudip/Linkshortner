@@ -162,10 +162,15 @@ def home(request, query=None):
         return render(request,'home.html')
     else:
         try:
-            check = shorturl.objects.get(short_url=query)
-            check.clicks = check.clicks + 1
-            check.save()
-            url_redirect = check.original_url
-            return redirect(url_redirect)
+            try:
+                check = shorturl.objects.get(short_url=query)
+                check.clicks = check.clicks + 1
+                check.save()
+                url_redirect = check.original_url
+                return redirect(url_redirect)
+            except:
+                check = notuserurl.objects.get(short_url=query)
+                url_redirect = check.original_url
+                return redirect(url_redirect)
         except shorturl.DoesNotExist:
             return render(request, 'home.html', {'error': 'Error'})
